@@ -1,0 +1,43 @@
+init_num: &init_num 5
+iter_num: &iter_num 20
+swap_num: &swap_num null
+device: &device cuda:0
+
+data_path: ./data/test_100_10/
+
+methods:
+  Gurobi:
+    run_fn: run_gurobi
+    OutputFlag: 0
+    MIPGap: 0
+
+  Greedy-swap:
+    run_fn: run_greedy_swap
+    init_num: *init_num
+    swap_num: *swap_num
+
+  Random-swap:
+    run_fn: run_random_swap
+    init_num: *init_num
+    iter_num: *iter_num
+    swap_num: *swap_num
+
+  SA:
+    run_fn: run_SA
+    iter_num: 1000
+    initial_temp: 10000
+    cooling_rate: 0.99
+
+  Maranzana:
+    run_fn: run_maranzana
+    iter_num: *iter_num
+    swap_num: *swap_num
+
+  PPO-swap:
+    run_fn: run_ppo_swap
+    init_num: *init_num
+    iter_num: *iter_num
+    swap_num: *swap_num
+    ckpt: todo_version
+    name: todo_version
+    device: *device

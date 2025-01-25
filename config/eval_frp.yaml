@@ -1,0 +1,33 @@
+iter_num: &iter_num 20
+device: &device cuda:0
+reloc_coef: 0.5
+
+data_path: ./data/test_100_10/
+
+methods:
+  Gurobi:
+    run_fn: run_gurobi_reloc
+    OutputFlag: 0
+    MIPGap: 0
+
+  Greedy-swap:
+    run_fn: run_greedy_swap_reloc
+    iter_num: *iter_num
+
+  Random-swap:
+    run_fn: run_random_swap_reloc
+    iter_num: *iter_num
+
+  BestResponse:
+    iter_num: *iter_num
+    run_fn: run_br
+
+  FR2FP:
+    run_fn: run_FR2FP
+
+  PPO-swap:
+    run_fn: run_ppo_swap_reloc
+    iter_num: *iter_num
+    ckpt: todo_version
+    name: todo_version
+    device: *device
